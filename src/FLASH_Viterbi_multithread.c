@@ -777,10 +777,10 @@ void tracebackroute()//space main body        Call code from main body
 int exmpleSNVviter()
 {
     int excu_i = 0;
-    char* str_MatrixA="E:\\Code\\Ccode\\test\\Nvviter\\new512data\\A_K3965_T256_prob0.075.txt";
-    char* str_MatrixB="E:\\Code\\Ccode\\test\\Nvviter\\new512data\\B_K3965_T256_prob0.075.txt";
-    char* str_MatrixPI="E:\\Code\\Ccode\\test\\Nvviter\\new512data\\Pi_K3965_T256_prob0.075.txt";
-    char* str_ObRoute="E:\\Code\\Ccode\\test\\Nvviter\\new512data\\ob_K3965_T256_prob0.075.txt";
+    char* str_MatrixA="A.txt";
+    char* str_MatrixB="B.txt";
+    char* str_MatrixPI="Pi.txt";
+    char* str_ObRoute="ob.txt";
     InitOutputpath();
     InitMatrixA(str_MatrixA);
     InitMatrixB(str_MatrixB);
