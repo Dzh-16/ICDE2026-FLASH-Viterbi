@@ -7,16 +7,6 @@
 #include <time.h>
 #include <windows.h>
 
-// #define STR_LEN     5      //Length of the input state sequence
-
-// #define SUPER_K_STATE     20      //State space size
-// #define SUPER_T_STATE     20
-// #define FST_SIZE    5       //firstN Size
-// #define BST_SIZE    5       //bestN Size
-
-// #define K_STATE     128    //State space size
-// #define T_STATE     100    //Observation state size
-
 
 #define K_STATE 512 // State space size                       Modified to same value as K
 #define T_STATE 50 // Observation state size
@@ -55,13 +45,6 @@ typedef struct {
     int task_count;
 } ThreadPool;
 int TotalTask;
-// typedef struct TreeNode // BST TREE NODE
-// {
-//     float count_score; // Records corresponding node probability
-//     int node_no;       // Records current node's hidden state
-//     struct TreeNode* lchild;
-//     struct TreeNode* rchild;
-// } TreeNode;
 
 void InitOutputpath()
 {

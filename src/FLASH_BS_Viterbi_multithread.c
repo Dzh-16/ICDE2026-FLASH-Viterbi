@@ -66,13 +66,6 @@ typedef struct element
     int State;
     int T3_State;
 } element;
-// typedef struct TreeNode // BST TREE NODE        Tree
-// {
-//     float count_score; // Records corresponding node probability value
-//     int node_no;       // Records current node corresponding hidden state
-//     struct TreeNode* lchild;
-//     struct TreeNode* rchild;
-// } TreeNode;
 
 void insert_binary_tree(element *heap, ElementType Value, int State, int T3_State)
 {
@@ -86,12 +79,6 @@ void initial_heap_element(element *heap)
     (*heap).Value = 0;
     (*heap).State = -1;
     (*heap).T3_State = -1;
-    // for (int i = 1; i < BeamSearchWidth + 1; i++)
-    // {
-    //     (*(heap + i)).Value = 0;
-    //     (*(heap + i)).State = -1;
-    //     (*(heap + i)).T3_State = -1;
-    // }
 }
 
 
@@ -236,29 +223,6 @@ Status generate_state_heap(ElementType probability_i, int i, element **heap_tota
     }
 }
 
-// void chaneg_T2_i(int changestate,int changgelabel,int i,int statei_value){
-
-//     if (!changgelabel){         //=0 means not full yet, can directly assign T2
-//         snvT2[i] =  statei_value;
-//         // printf("input state : %d , Arc: %d -> %d \n",insert,statei_value,i);
-//         }
-//     else if(changgelabel==1){   //=1 means full and need to replace state i, corresponding state is statei_value, changgelabel is replaced state
-//         snvT2[i] =  statei_value;
-//         snvT2[changestate] =  -1;
-//         printf("change stae %d value to %d ,input state %d value to %d\n",snvT2[changestate],changestate,snvT2[i],i);
-//         }
-//     else{                       //=2 means full but no replacement needed
-//         snvT2[i] =  -1;
-//         printf("input stae %d value to %d\n",snvT2[i],i);
-//         }
-// }
-
-// void  Change_T3_element(element **heap,int snvT3[]){
-//     for (int i = 1; i<BeamSearchWidth+1; i++) {
-//         snvT3[(*((*heap) + i)).State]=(*((*heap) + i)).T3_State;
-//         // printf("heap element is %lf,state is %d,T3 state is %d\n",(*((*heap) + i)).Value,(*((*heap) + i)).State,(*((*heap) + i)).T3_State);}
-// }
-// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -360,11 +324,6 @@ void InitMatrixA(char* str_MatrixA)
 
     if (tmpt)
     {
-        // ElementType tmpt[K_STATE*K_STATE]= {0};//Large array overflow
-        //  FILE* fpRead = fopen("C:/Users/DELL/Documents/work/source/Nvvviter/dataset/matrixA_500plus500_fixed.txt", "rb+");//matrixA or matrixB
-        // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\A.txt", "rb+"); // matrixA or matrixB After successfully opening file, fopen() returns file pointer. File pointer type is FILE
-        // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\A_512.txt", "rb+"); // matrixA or matrixB After successfully opening file, fopen() returns file pointer. File pointer type is FILE
-        // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\new512data\\A_512.txt", "rb+"); // matrixA or matrixB After successfully opening file, fopen() returns file pointer. File pointer type is FILE
         FILE *fpRead = fopen(str_MatrixA, "rb+"); // matrixA or matrixB After successfully opening file, fopen() returns file pointer. File pointer type is FILE
 
         if (fpRead == NULL)
@@ -398,10 +357,6 @@ void InitMatrixB(char* str_MatrixB )
     ElementType *tmpt = (ElementType *)malloc(sizeof(ElementType) * K_STATE * T_STATE);
     if (tmpt)
     {
-        // static ElementType tmpt[K_STATE*T_STATE]= {0};
-        //  FILE* fpRead = fopen("C:/Users/DELL/Documents/work/source/Nvvviter/dataset/matrixB_500plus500_fixed.txt", "rb+");//matrixA or matrixB
-        // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\B_512.txt", "rb+"); // matrixA or matrixB
-        // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\new512data\\B_512.txt", "rb+"); // matrixA or matrixB
         FILE *fpRead = fopen(str_MatrixB, "rb+"); // matrixA or matrixB
 
         if (fpRead == NULL)
@@ -436,10 +391,6 @@ void InitMatrixPI(char* str_MatrixPI)
         printf("malloc failed!!");
         return;
     }
-    // ElementType tmpt[K_STATE]= {0};
-    //  FILE* fpRead = fopen("C:/Users/DELL/Documents/work/source/Nvvviter/dataset/matrixPi500_fixed.txt", "rb+");
-    // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\Pi_512.txt", "rb+");
-    // FILE *fpRead = fopen("E:\\Code\\Ccode\\test\\Nvviter\\new512data\\Pi_512.txt", "rb+");
     FILE *fpRead = fopen(str_MatrixPI, "rb+");
 
 
@@ -467,9 +418,6 @@ void InitObRoute(char* str_ObRoute)
 {
     int i, j;
     int tmpt[ObserRouteLEN] = {0};
-    // FILE* fpRead3 = fopen("C:/Users/DELL/Documents/work/source/Nvvviter/dataset/obRoute5000K500.txt", "rb+");
-    // FILE *fpRead3 = fopen("E:\\Code\\Ccode\\test\\Nvviter\\ob_512.txt", "rb+");
-    // FILE *fpRead3 = fopen("E:\\Code\\Ccode\\test\\Nvviter\\new512data\\ob_512.txt", "rb+");
     FILE *fpRead3 = fopen(str_ObRoute, "rb+");
 
     if (fpRead3 == NULL)
@@ -650,33 +598,6 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                     double B_data=log(B[i][T_obs]);
                     double pi_data=log(pi[i]);
                     ElementType probability_i = log(pi[i]) + log(B[i][T_obs]); // Initialize T1, use log to avoid data underflow
-                    // if (i<BeamSearchWidth-1){
-                    //     insert_binary_tree(position,probability_i ,i);
-                    //     num->Value++;
-                    //     printf("total number is %d ,new element is %lf  ,state is %d  \n",num->Value,position->Value,position->State);
-                    //     position++;
-                    //     }
-                    // else if (i==BeamSearchWidth-1){
-                    //     insert_binary_tree(position,probability_i ,i);
-                    //     num->Value++;
-                    //     printf("total number is %d  ,new element is %lf  ,state is %d  \n",num->Value,position->Value,position->State);
-                    //     create_max_heap(heap_total);
-                    //     //Output sorted result
-                    //     print_heap_element(heap_total);
-                    //     }
-                    // else{
-                    //     if (probability_i>heap_total[1].Value){
-                    //         printf("\nChange:new element value is %lf state is %d  ,Total min element is %lf  state is %d  \n",probability_i,i,heap_total[1].Value,heap_total[1].State);
-                    //         heap_total[1].Value=probability_i;
-                    //         heap_total[1].State=i;
-                    //         create_max_heap(heap_total);
-                    //         print_heap_element(heap_total);
-                    //         }
-                    //         // Hidden
-                    //     else{
-                    //         printf("Keep:new element value is %lf  state is %d  ,Total min element is %lf  state is %d  \n",probability_i,i,heap_total[1].Value,heap_total[1].State);
-                    //         }
-                    //     }
                     int changestate;
                     int changgelabel = generate_state_heap(probability_i, i, &heap_total, &changestate, -1);
                     // chaneg_T2_i(changestate,changgelabel,i,-1);
@@ -687,12 +608,6 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                 heap_pre = heap_total;
                 heap_total = heap_tem;
                 initial_heap_element(heap_total);
-
-
-                // Output sorted result, for testing
-                //  print_heap_element(&heap_pre);
-                //  snvT1[i] = log(pi[i]) + log(B[i][T_obs]); // Initialize T1, use log to avoid data underflow
-                // printf("over:\n");
             }
             else // Other cases initialize column, if not initial column, means previous mid column, so directly find corresponding state, others initialize to 0
             {
@@ -703,35 +618,9 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                 int State_temp = snvOutPutPath[qpreNode - 1]; //  Current start corresponding state value
                 for (i = 0; i < K_STATE; i++)                 // Row, for known start element start point (i), directly use i corresponding probability for subsequent state assignment
                 {
-                    // for (int k = 0; k < K_STATE; k++)
-                    // {
-                    //     scorearr[k] = snvT1[k] + log(A[k][i]) + log(B[i][T_obs]); // Calculate all probability values, use log to avoid underflow, T1 already log
-                    // }
-                    // int scoreNo = 0;
-                    // ElementType scoreMax = 0;
-                    // int* p = &scoreNo;
-                    // ElementType* q = &scoreMax;
-                    // max_score(scorearr, K_STATE, p, q); //T2 stores index, T1 is probability
-                    // snvTtmp[i] = scoreMax; // Underflow
-                    // snvT2[i] = scoreNo;//First half doesn't need path storage
                     ElementType probability_i = log(A[State_temp][i]) + log(B[i][T_obs]);
                     int changestate;
                     int changgelabel = generate_state_heap(probability_i, i, &heap_total, &changestate, -1);
-                    // chaneg_T2_i(changestate,changgelabel,i,State_temp);
-
-                    // if (!changgelabel){
-                    //     snvT2[i] =  State_temp;}
-                    // else if(changgelabel==1)
-                    // {
-                    //     snvT2[i] =  State_temp;
-                    //     snvT2[changestate] =  -1;
-                    //     print("change stae %d value to %d ,input state %d value to %d\n",changestate,snvT2[changestate],i,snvT2[i]);
-                    // }
-                    // else{
-                    //     snvT2[i] =  -1;
-                    //     print("input stae %d value to %d\n",i,snvT2[i]);
-                    // }
-                    // snvT3[i] = -1;                            // Initialize T3
                 }
                 element *heap_tem = heap_pre;
                 heap_pre = heap_total;
@@ -767,16 +656,12 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                 int T3_state_test=heap_pre[scoreNo + 1].State;
                 int changestate;
                 int changgelabel = generate_state_heap(probability_i, i, &heap_total, &changestate, heap_pre[scoreNo + 1].State);
-                // chaneg_T2_i(changestate,changgelabel,i,-1);//First half doesn't need path storage
-                // snvT2[i] = scoreNo;//First half doesn't need path storage
             }
             // printf("over:\n");
             element *heap_tem = heap_pre;
             heap_pre = heap_total;
             heap_total = heap_tem;
             initial_heap_element(heap_total);
-            // Output sorted result, for testing
-            //  print_heap_element(&heap_pre);
         }
         // Column midpoint+1                               5
         else if (j == midpoint + 1)
@@ -801,22 +686,12 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                 ElementType probability_i = scoreMax; // Underflow
                 int changestate;
                 int changgelabel = generate_state_heap(probability_i, i, &heap_total, &changestate, heap_pre[scoreNo + 1].State);
-                // chaneg_T2_i(changestate,changgelabel,i,heap_pre[scoreNo+1].State);//Second half path starts saving T2; merged with heap operation
             }
             // printf("over:\n");
             element *heap_tem = heap_pre;
             heap_pre = heap_total;
             heap_total = heap_tem;
             initial_heap_element(heap_total);
-
-
-            // Output sorted result, for testing
-            //  print_heap_element(&heap_pre);
-            //  Change_T3_element(&heap_pre,snvT3);
-
-            // for (i = 0; i < K_STATE; i++){ // Copy temp probability values, and update T3 column, T2 and T3 iterative update
-            //         snvT3[i] = snvT2[i];
-            // }
         }
         // Column midpoint+2 to qsucNode column         6-8
         else 
@@ -843,22 +718,12 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
                 int changestate;
                 int T3_state =  heap_pre[scoreNo + 1].T3_State;            // Find_T3_State(&heap_pre, heap_pre[scoreNo + 1].State);
                 int changgelabel = generate_state_heap(probability_i, i, &heap_total, &changestate, T3_state); // Merged with heap operation
-                // chaneg_T2_i(changestate,changgelabel,i,snvT3[heap_pre[scoreNo+1].State]);//Second half path starts saving T2
             } // Assign max value index to
 
             element *heap_tem = heap_pre;
             heap_pre = heap_total;
             heap_total = heap_tem;
             initial_heap_element(heap_total);
-            // Output sorted result, for testing
-            //  print_heap_element(&heap_pre);
-            //  Change_T3_element(&heap_pre,snvT3);
-
-            // for (i = 0; i < K_STATE; i++) // Copy temp probability values and update T3 column, T2 and T3 iterative update
-            // {
-            //     // snvT1[i] = snvTtmp[i];
-            //     snvT3[i] = snvT2[i];
-            // }
         }
     }
     // Now stores intermediate node path and final node probability
@@ -875,7 +740,6 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
             {
                 last_max_no=i;
                 last_max = heap_pre[i + 1].Value;
-                // last_max_state = heap_pre[i + 1].State;
             }
         }
         ElementType value_test=heap_pre[last_max_no+1].Value;
@@ -885,8 +749,6 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
         snvOutPutPath[qsucNode] = heap_pre[last_max_no+1].State; // Second last node value //?Store max value
 
         snvOutPutPath[midpoint] = heap_pre[last_max_no+1].T3_State;    //Find_T3_State(&heap_pre, last_max_no);
-        // snvOutPutPath[midpoint] = snvT3[last_max_no]; // midpoint node value, final T2 same as T3
-
         // printf("heap_total memory usage: %zu bytes\n", sizeof(heap_1));
         // printf("heap_pre memory usage: %zu bytes\n", sizeof(heap_2));
         // printf("scorearr memory usage: %zu bytes\n", sizeof(scorearr));
@@ -903,13 +765,8 @@ void Viterbifirst(int qpreNode, int qsucNode) // Case when >3
     }
     else // All others execute
     {
-        // if(qpreNode==320&&qsucNode==383)
-        // {
-        //     printf("over:\n");
-        // }
         int connt = snvOutPutPath[qsucNode]; // Find current end point state value
         snvOutPutPath[midpoint] = Find_T3_State(&heap_pre, connt);
-        // snvOutPutPath[midpoint] = snvT3[connt]; // Output within current path range, output T3 value at this state point
     }
 
 }
