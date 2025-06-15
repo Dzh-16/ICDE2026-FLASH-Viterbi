@@ -7,18 +7,10 @@
 #include <time.h>
 #include <windows.h>
 
-// #define STR_LEN 5   // Length of input state sequence characters
-// #define K_STATE 128 // State space size
-// #define T_STATE 100 // Observation state size
+
 #define K_STATE 3965 // State space size                        Modified to same value as K
 #define T_STATE 50 // Observation state size
-// #define SUPER_K_STATE     20      //State space size
-// #define SUPER_T_STATE     20
-// #define FST_SIZE    5       //firstN size
-// #define BST_SIZE    5       //bestN size
-
 #define ObserRouteLEN 256 // Observation path length             Modified to same value as T
-
 #define BeamSearchWidth 128// State constraint size                        Modified to same value as Beam width
 
 #define MAX_THREADS 7
